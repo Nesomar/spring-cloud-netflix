@@ -1,4 +1,4 @@
-package br.com.academy.model;
+package br.com.academy.crud.model;
 
 import java.io.Serializable;
 
