@@ -1,9 +1,9 @@
-package br.com.academy.service.mapper;
+package br.com.academy.crud.service.mapper;
 
 import org.modelmapper.ModelMapper;
 
 import br.com.academy.crud.entity.Produto;
-import br.com.academy.model.ProdutoVO;
+import br.com.academy.crud.model.ProdutoVO;
 
 public class ProdutoMapper {
 

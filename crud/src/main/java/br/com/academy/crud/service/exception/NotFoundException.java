@@ -1,4 +1,4 @@
-package br.com.academy.service.exception;
+package br.com.academy.crud.service.exception;
 
 
 public class NotFoundException extends RuntimeException {

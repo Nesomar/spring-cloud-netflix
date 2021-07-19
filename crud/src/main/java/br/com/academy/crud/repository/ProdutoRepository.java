@@ -1,4 +1,4 @@
-package br.com.academy.repository;
+package br.com.academy.crud.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

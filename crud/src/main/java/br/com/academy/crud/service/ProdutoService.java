@@ -1,14 +1,14 @@
-package br.com.academy.service;
+package br.com.academy.crud.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.academy.model.ProdutoVO;
-import br.com.academy.repository.ProdutoRepository;
-import br.com.academy.service.exception.NotFoundException;
-import br.com.academy.service.mapper.ProdutoMapper;
+import br.com.academy.crud.model.ProdutoVO;
+import br.com.academy.crud.repository.ProdutoRepository;
+import br.com.academy.crud.service.exception.NotFoundException;
+import br.com.academy.crud.service.mapper.ProdutoMapper;
 import lombok.RequiredArgsConstructor;
 
 @Service
