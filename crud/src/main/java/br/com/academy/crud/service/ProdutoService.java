@@ -41,9 +41,15 @@ public class ProdutoService {
 	}
 	
 	@Transactional
-	public ProdutoVO update(Long id) {
+	public ProdutoVO update(Long id, ProdutoVO produtoVO) {
+		
 		var produto = repository.findById(id)
 				.orElseThrow(() -> new NotFoundException(String.format(PRODUTO_NAO_LOCALIZADO, id)));
+		
+		produto.setEstoque(produtoVO.getEstoque());
+		produto.setNome(produtoVO.getNome());
+		produto.setPreco(produtoVO.getPreco());
+		
 		return ProdutoMapper.toModel(repository.save(produto));
 	}
 	

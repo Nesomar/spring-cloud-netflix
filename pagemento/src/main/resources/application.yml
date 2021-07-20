@@ -1,0 +1,22 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /pagamento
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: aws
+    password: aws
+    url: jdbc:postgresql://localhost:5434/aws
+    platform: postgres
+    initialization-mode: always
+    continue-on-error: true
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+  application:
+    name: crud

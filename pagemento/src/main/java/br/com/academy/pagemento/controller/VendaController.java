@@ -1,4 +1,4 @@
-package br.com.academy.crud.controller;
+package br.com.academy.pagemento.controller;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -26,24 +26,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.academy.crud.model.ProdutoVO;
-import br.com.academy.crud.service.ProdutoService;
+import br.com.academy.pagemento.model.VendaVO;
+import br.com.academy.pagemento.service.VendaService;
 
 @RestController
-@RequestMapping(path = "/produtos")
-public class ProdutoController {
+@RequestMapping(path = "/vendas")
+public class VendaController {
+	
+	@Autowired
+	private VendaService service;
+	
+	@Autowired
+	private PagedResourcesAssembler<VendaVO> assembler;
 
-	@Autowired
-	private ProdutoService service;
-	
-	@Autowired
-	private PagedResourcesAssembler<ProdutoVO> assembler;
-	
 	@PostMapping
-	public ResponseEntity<ProdutoVO> create(@RequestBody @Valid ProdutoVO produto) {
+	public ResponseEntity<VendaVO> create(@RequestBody @Valid VendaVO vendaVO) {
 		
-		ProdutoVO produtoVO = service.create(produto);
-		produtoVO.add(linkTo(methodOn(ProdutoController.class).findById(produtoVO.getId())).withSelfRel());
+		VendaVO produtoVO = service.create(vendaVO);
+		produtoVO.add(linkTo(methodOn(VendaController.class).findById(produtoVO.getId())).withSelfRel());
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(produtoVO);
 	}
@@ -52,38 +52,38 @@ public class ProdutoController {
 	public ResponseEntity<?> findAll(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "limit", defaultValue = "12") Integer limit,
 			@RequestParam(value = "direction", defaultValue = "asc") String direction,
-			@RequestParam(value = "column", defaultValue = "nome") String column) {
+			@RequestParam(value = "column", defaultValue = "dataVenda") String column) {
 		
 		var sorDirection = Direction.DESC.name().equalsIgnoreCase(direction) ? Direction.DESC : Direction.ASC;
 		
 		Pageable pageable = PageRequest.of(page, limit, Sort.by(sorDirection, column));
 		
-		Page<ProdutoVO> produtos = service.findAll(pageable);
+		Page<VendaVO> produtos = service.findAll(pageable);
 		
-		produtos.stream().forEach(p -> p.add(linkTo(methodOn(ProdutoController.class).findById(p.getId())).withSelfRel()));
+		produtos.stream().forEach(p -> p.add(linkTo(methodOn(VendaController.class).findById(p.getId())).withSelfRel()));
 		
-		PagedModel<EntityModel<ProdutoVO>> pagedModel = assembler.toModel(produtos);
+		PagedModel<EntityModel<VendaVO>> pagedModel = assembler.toModel(produtos);
 		
 		return ResponseEntity.ok(pagedModel);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<ProdutoVO> findById(@PathVariable Long id) {
+	public ResponseEntity<VendaVO> findById(@PathVariable Long id) {
 		
-		ProdutoVO produtoVO = service.findById(id);
-		produtoVO.add(linkTo(methodOn(ProdutoController.class).findById(id)).withSelfRel());
+		VendaVO vendaVO = service.findById(id);
+		vendaVO.add(linkTo(methodOn(VendaController.class).findById(id)).withSelfRel());
 		
-		return ResponseEntity.ok(produtoVO);
+		return ResponseEntity.ok(vendaVO);
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<?> update(@PathVariable Long id, @RequestBody ProdutoVO produto) {
+	public ResponseEntity<?> update(@PathVariable Long id, @RequestBody VendaVO vendaUpdate) {
 		
-		ProdutoVO produtoVO = service.update(id, produto);
+		VendaVO vendaVO = service.update(id, vendaUpdate);
 		
-		produtoVO.add(linkTo(methodOn(ProdutoController.class).findById(produtoVO.getId())).withSelfRel());
+		vendaVO.add(linkTo(methodOn(VendaController.class).findById(vendaVO.getId())).withSelfRel());
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(produtoVO);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).body(vendaVO);
 	}
 	
 	@DeleteMapping(value = "/{id}")
