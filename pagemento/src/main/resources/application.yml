@@ -1,14 +1,14 @@
 server:
-  port: 8081
+  port: 8083
   servlet:
-    context-path: /crud
+    context-path: /pagamento
 
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: app
-    password: app
-    url: jdbc:postgresql://localhost:5433/app
+    username: aws
+    password: aws
+    url: jdbc:postgresql://localhost:5434/aws
     platform: postgres
     initialization-mode: always
     continue-on-error: true

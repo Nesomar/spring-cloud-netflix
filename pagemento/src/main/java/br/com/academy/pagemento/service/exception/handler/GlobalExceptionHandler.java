@@ -1,4 +1,4 @@
-package br.com.academy.crud.service.exception.handler;
+package br.com.academy.pagemento.service.exception.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import br.com.academy.crud.model.MensagemErrorVO;
-import br.com.academy.crud.service.exception.NotFoundException;
+import br.com.academy.pagemento.model.MensagemErrorVO;
+import br.com.academy.pagemento.service.exception.NotFoundException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {

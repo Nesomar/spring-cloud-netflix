@@ -1,12 +1,15 @@
-package br.com.academy.crud.model;
+package br.com.academy.pagemento.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.List;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.hateoas.RepresentationModel;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,22 +17,24 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Builder
 @EqualsAndHashCode(callSuper = false)
-public class ProdutoVO extends RepresentationModel<ProdutoVO> implements Serializable {
+public class VendaVO extends RepresentationModel<VendaVO> implements Serializable {
 
-	private static final long serialVersionUID = 3319604504696036083L;
+	private static final long serialVersionUID = 1910371319940223570L;
 
 	private Long id;
-	@NotBlank
-	@Size(max = 255)
-	private String nome;
+	
 	@NotNull
-	private Integer estoque;
+	private LocalDate dataVenda;
+	
 	@NotNull
-	private Double preco;
+	private Double valorTotal;
+	
+	@Valid
+	@Size(min = 1)
+	private List<ProdutoVendaVO> produtos;
 }
