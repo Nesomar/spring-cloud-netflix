@@ -1,1 +1,22 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /crud
 
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: app
+    password: app
+    url: jdbc:postgresql://localhost:5433/app
+    platform: postgres
+    initialization-mode: always
+    continue-on-error: true
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+  application:
+    name: crud

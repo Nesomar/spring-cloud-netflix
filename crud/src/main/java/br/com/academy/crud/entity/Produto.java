@@ -29,9 +29,9 @@ public class Produto implements Serializable {
 	@Column(name = "nome", nullable = false, length = 255)
 	private String nome;
 	
-	@Column(name = "nome", nullable = false, length = 10)
+	@Column(name = "estoque", nullable = false, length = 10)
 	private Integer estoque;
 	
-	@Column(name = "nome", nullable = false, length = 10)
+	@Column(name = "preco", nullable = false, length = 10)
 	private Double preco;
 }
