@@ -39,7 +39,7 @@ public class Venda implements Serializable {
 	private Double valorTotal;
 	
 	@Setter(value = AccessLevel.PRIVATE)
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "venda", cascade = CascadeType.REFRESH)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "venda", cascade = CascadeType.REFRESH, orphanRemoval = true)
 	private List<ProdutoVenda> produtos = new ArrayList<>();
 	
 	public void adicionarProdutos(List<ProdutoVenda> produtos) {
@@ -51,7 +51,7 @@ public class Venda implements Serializable {
 		produtos.add(produto);
 	}
 	
-	public void removerProdutos(List<ProdutoVenda> produtos) {
+	public void removerProdutos() {
 		produtos.forEach(pv -> pv.setVenda(this));
 		produtos.clear();
 	}
