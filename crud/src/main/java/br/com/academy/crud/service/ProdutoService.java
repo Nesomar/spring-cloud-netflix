@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.academy.crud.message.ProdutoSendMessage;
 import br.com.academy.crud.model.ProdutoVO;
 import br.com.academy.crud.repository.ProdutoRepository;
 import br.com.academy.crud.service.exception.NotFoundException;
@@ -18,10 +19,18 @@ public class ProdutoService {
 	
 	@Autowired
 	private ProdutoRepository repository; 
+	
+	@Autowired
+	private ProdutoSendMessage produtoSendMessage;
 
 	@Transactional
-	public ProdutoVO create(ProdutoVO produtoVO) {
-		return ProdutoMapper.toModel(repository.save(ProdutoMapper.toEntity(produtoVO)));
+	public ProdutoVO create(ProdutoVO produto) {
+		
+		ProdutoVO produtoVO = ProdutoMapper.toModel(repository.save(ProdutoMapper.toEntity(produto)));
+		
+		produtoSendMessage.sendMessage(produtoVO);
+		
+		return produtoVO;
 	}
 	
 	public Page<ProdutoVO> findAll(Pageable pageable) {

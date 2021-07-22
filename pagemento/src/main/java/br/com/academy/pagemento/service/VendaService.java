@@ -68,8 +68,12 @@ public class VendaService {
 	
 	@Transactional
 	public void delete(Long id) {
-		var produto = repository.findById(id)
+		
+		var venda = repository.findById(id)
 				.orElseThrow(() -> new NotFoundException(String.format(VENDA_NAO_LOCALIZADO, id)));
-		repository.delete(produto);
+		
+		venda.removerProdutos();
+		
+		repository.delete(venda);
 	}
 }
